@@ -1,8 +1,3 @@
-function logout() {
-    window.location = "index.html";
-} 
-
-    
 
 //ADD YOUR FIREBASE LINKS HERE
 // Your web app's Firebase configuration
@@ -16,14 +11,17 @@ const firebaseConfig = {
     appId: "1:1034126016143:web:7258762c603b30ac1cbafa"
   };
   
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
+
+  // Initialize Firebase 
+  //const app = initializeApp(firebaseConfig);
   // Import the functions you need from the SDKs you need
-  import { initializeApp } from "firebase/app";
+  //import { initializeApp } from "firebase/app";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
   
-  
+  username=localStorage.getItem("username");
+  document.getElementById("username").innerHTML = "";//"Welcome" + username + "!";
   
   function getData() {firebase.database().ref("/").on('value', function(snapshot) {document.getElementById("output").innerHTML = "";snapshot.forEach(function(childSnapshot) {childKey  = childSnapshot.key;
          Room_names = childKey;
@@ -35,8 +33,8 @@ const firebaseConfig = {
         });});}
   getData();
  
-  username=localStorage.getItem("username");
-  document.getElementById("username").innerHTML = "Welcome" + username + "!";
+  
+  
   
   function addroom() {
   
@@ -45,7 +43,7 @@ const firebaseConfig = {
   firebase.database().ref("/").child(roomname).update({
     purpose: "adding room"
   });
-  
+
   console.log("room added"); 
   localStorage.setItem("roomname", roomname);
   
